@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <UseWPF>true</UseWPF>
+        <TargetFramework>net48</TargetFramework>
+        <LangVersion>8</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MaterialDesignColors" Version="1.2.7" />
+      <PackageReference Include="MaterialDesignThemes" Version="3.2.0" />
+      <PackageReference Include="System.Text.Json" Version="4.7.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Components\ApartmentModal" />
+    </ItemGroup>
+
+</Project>

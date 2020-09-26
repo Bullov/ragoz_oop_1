@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="ragoz_oop_1.Components.ApartmentModal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:models="clr-namespace:ragoz_oop_1.models"
+             xmlns:components="clr-namespace:ragoz_oop_1.Components"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{md:MaterialDesignFont}">
+    <UserControl.DataContext>
+        <components:ApartmentModalViewModel/>
+    </UserControl.DataContext>
+    <Grid Margin="16" MinHeight="260" MinWidth="360">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="5">
+            <DockPanel>
+                <Button
+                    Style="{StaticResource MaterialDesignIconButton}"
+                    ToolTip="MaterialDesignIconButton"
+                    Margin="-10 -10 0 0"
+                    DockPanel.Dock="Right"
+                    IsCancel="True"
+                    Command="{x:Static md:DialogHost.CloseDialogCommand}">
+                    <Button.CommandParameter>
+                        <system:Boolean>False</system:Boolean>
+                    </Button.CommandParameter>
+                    <md:PackIcon Kind="Close" />
+                </Button>
+                <TextBlock 
+                    Text="Apartment"
+                    TextAlignment="Center"
+                    VerticalAlignment="Center"
+                    TextWrapping="Wrap"
+                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+            </DockPanel>
+            
+            <Separator/>
+            <StackPanel
+                HorizontalAlignment="Center"
+                Orientation="Horizontal"
+                Visibility="{Binding EditControlsVisibility}"
+                Margin="4">
+                <RadioButton
+                    Style="{StaticResource MaterialDesignTabRadioButton}"
+                    Margin="4"
+                    IsChecked="{Binding IsTopZone }"
+                    Command="{Binding SetIsTopZone}"
+                    Content="Top Zone" />
+                <RadioButton
+                    Style="{StaticResource MaterialDesignTabRadioButton}"
+                    Margin="4"
+                    IsChecked="{Binding IsBottomZone}"
+                    Command="{Binding SetIsBottomZone}"
+                    Content="Bottom Zone" />
+            </StackPanel>
+            <StackPanel Visibility="{Binding EditControlsVisibility}">
+                <TextBox
+                    md:HintAssist.Hint="Номер квартиры"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox
+                    md:HintAssist.Hint="Площадь"
+                    md:TextFieldAssist.SuffixText="{Binding StringFormat=max: {0}, Path=MaxArea}"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding Area}"/>
+                <TextBox
+                    md:HintAssist.Hint="Жилая площадь"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding LivingArea, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox
+                    md:HintAssist.Hint="Кол-во комнат"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding RoomsNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox
+                    md:HintAssist.Hint="Кол-во проживающих"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding LivingPeopleNumber, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            
+            <StackPanel Visibility="{Binding ViewControlsVisibility}">
+                <TextBlock
+                    Style="{StaticResource MaterialDesignBody1TextBlock}"
+                    Text="{Binding StringFormat=Номер квартиры: {0}, Path=Number}"/>
+                <TextBlock
+                    Style="{StaticResource MaterialDesignBody1TextBlock}"
+                    Text="{Binding StringFormat=Площадь квартиры: {0}, Path=Area}"/>
+                <TextBlock
+                    Style="{StaticResource MaterialDesignBody1TextBlock}"
+                    Text="{Binding StringFormat=Жилая площадь: {0}, Path=LivingArea}"/>
+                <TextBlock
+                    Style="{StaticResource MaterialDesignBody1TextBlock}"
+                    Text="{Binding StringFormat=Кол-во комнат: {0}, Path=RoomsNumber}"/>
+                <TextBlock
+                    Style="{StaticResource MaterialDesignBody1TextBlock}"
+                    Text="{Binding StringFormat=Кол-во проживающих: {0}, Path=LivingPeopleNumber}"/>
+            </StackPanel>
+            
+        </StackPanel>
+        
+        <Separator Grid.Row="1"/>
+        
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0 16 0 0">
+            
+            <Button IsDefault="True"
+                    Content="Сохранить"
+                    Visibility="{Binding EditControlsVisibility}"
+                    Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{Binding Save}">
+            </Button>
+            
+            <Button IsCancel="True"
+                    Margin="24 0 0 0"
+                    Content="Закрыть"
+                    Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static md:DialogHost.CloseDialogCommand}">
+                <Button.CommandParameter>
+                    <system:Boolean>False</system:Boolean>
+                </Button.CommandParameter>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>
