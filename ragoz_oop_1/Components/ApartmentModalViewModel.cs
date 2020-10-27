@@ -89,7 +89,7 @@ namespace ragoz_oop_1.Components
             set
             {
                 var parse = int.TryParse(value, out var number);
-                if (parse && number >= MinArea && number <= MaxArea)
+                if (parse && number >= MinArea && number <= MaxArea || !IsEdit)
                 {
                     _area = number;
                     OnPropertyChanged(nameof(Area));
